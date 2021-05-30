@@ -1,2 +1,2 @@
 # self-used_STL
-for practice
+This is only for practice. ^ ^
