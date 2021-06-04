@@ -142,6 +142,7 @@ void TrieNode::display(std::string word) {
 }
 
 
+// Test:
 //Trie* t = new Trie{ "hello","here","her","hereby","world","word" };
 //t->insert("how");
 //t->insert("high");
@@ -151,7 +152,7 @@ void TrieNode::display(std::string word) {
 //t->insert("who");
 //t->display();
 
-////t->clear(t->getRoot());	//ËäÈ»¿ÉÒÔ£¬µ«²»ÔÞ³É£¬ÏëÒªclear¾ÍÖ±½Ódeleteµô
+////t->clear(t->getRoot());	//è™½ç„¶å¯ä»¥ï¼Œä½†ä¸èµžæˆï¼Œæƒ³è¦clearå°±ç›´æŽ¥deleteæŽ‰
 ////t->display();
 
 //TrieNode* p;
