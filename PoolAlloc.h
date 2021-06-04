@@ -175,7 +175,7 @@
 //	Teacher* tp2 = new Teacher(9, *p);
 //	Teacher::myAlloc.check(1);
 //
-//	delete p;	// newÍê±ğÍüÁËdelete
+//	delete p;	// newå®Œåˆ«å¿˜äº†delete
 //	delete tp2;
 //}
 
@@ -190,48 +190,48 @@ private:
 	enum e4 { N_OBJS = 20 };
 
 private:
-	// ÏòÉÏ¶ÔÆëÎª8µÄ±¶Êı
+	// å‘ä¸Šå¯¹é½ä¸º8çš„å€æ•°
 	inline size_t round_up(size_t size) {	return ((size + AlIGN - 1) & ~(AlIGN - 1));}
 
-	// ÔÚMAX_LIST_LENÖĞÕÒµ½ĞèÒªÓÃµ½µÄÁ´±íµÄË÷ÒıºÅ
+	// åœ¨MAX_LIST_LENä¸­æ‰¾åˆ°éœ€è¦ç”¨åˆ°çš„é“¾è¡¨çš„ç´¢å¼•å·
 	inline int find_list_index(size_t size) {	return (int)size / AlIGN  - 1;}
 
 public:
-	// ·ÖÅäsize×Ö½ÚµÄÄÚ´æ¿Õ¼ä£¬·µ»ØÆäÖ¸Õë
+	// åˆ†é…sizeå­—èŠ‚çš„å†…å­˜ç©ºé—´ï¼Œè¿”å›å…¶æŒ‡é’ˆ
 	void* allocate(size_t size);
 
-	// ÊÍ·ÅpÖ¸ÏòµÄ£¬´óĞ¡Îªsize×Ö½ÚµÄÄÚ´æ¿Õ¼ä
+	// é‡Šæ”¾pæŒ‡å‘çš„ï¼Œå¤§å°ä¸ºsizeå­—èŠ‚çš„å†…å­˜ç©ºé—´
 	void deallocate(void* p, size_t size);
 
-	// ´òÓ¡ÄÚ´æ¹ÜÀíÏà¹ØĞÅÏ¢
+	// æ‰“å°å†…å­˜ç®¡ç†ç›¸å…³ä¿¡æ¯
 	void outputInfo();
 
 private:
-	// ³¢ÊÔÔÚ¡°Õ½±¸³Ø¡±ÖĞÇĞÒ»¿é¿ÕÏĞÄÚ´æ³öÀ´£¬ÔÚallocateÃ»ÓĞ¿ÕÏĞÄÚ´æÊ±±»µ÷ÓÃ
+	// å°è¯•åœ¨â€œæˆ˜å¤‡æ± â€ä¸­åˆ‡ä¸€å—ç©ºé—²å†…å­˜å‡ºæ¥ï¼Œåœ¨allocateæ²¡æœ‰ç©ºé—²å†…å­˜æ—¶è¢«è°ƒç”¨
 	void* refill(size_t size);
 
-	// À©³ä¡°Õ½±¸³Ø¡±£¬ÔÚrefillÎŞ¼Æ¿ÉÊ©Ê±±»µ÷ÓÃ
+	// æ‰©å……â€œæˆ˜å¤‡æ± â€ï¼Œåœ¨refillæ— è®¡å¯æ–½æ—¶è¢«è°ƒç”¨
 	char* chunk_alloc(size_t size, int& nObjs);
 
 private:
-	// ½èÓÃ¿ÕÏĞÄÚ´æµÄÇ°4 Bytes×÷Îªembedded pointer
+	// å€Ÿç”¨ç©ºé—²å†…å­˜çš„å‰4 Bytesä½œä¸ºembedded pointer
 	struct obj{	struct obj* next;};
 
-	// Ö¸ÕëÊı×é£¬MAX_LIST_LEN¸öÖ¸Õë·Ö±ğÖ¸ÏòÏà¶ÔÓ¦µÄÁ´±íÍ·²¿
+	// æŒ‡é’ˆæ•°ç»„ï¼ŒMAX_LIST_LENä¸ªæŒ‡é’ˆåˆ†åˆ«æŒ‡å‘ç›¸å¯¹åº”çš„é“¾è¡¨å¤´éƒ¨
 	obj* free_lists[MAX_LIST_LEN] = {nullptr};
 
-	//¡°Õ½±¸³Ø¡±µÄstartÎ»ÖÃ£¬ÒÔByteÎªµ¥Î»£¬¹Êchar*
+	//â€œæˆ˜å¤‡æ± â€çš„startä½ç½®ï¼Œä»¥Byteä¸ºå•ä½ï¼Œæ•…char*
 	char* start_free = 0;
 
-	//¡°Õ½±¸³Ø¡±µÄendÎ»ÖÃ£¬Ò²ÒÔByteÎªµ¥Î»
+	//â€œæˆ˜å¤‡æ± â€çš„endä½ç½®ï¼Œä¹Ÿä»¥Byteä¸ºå•ä½
 	char* end_free = 0;
 
 private:
-	PoolAlloc() {	// ¹¹Ôìº¯Êıprivate£¬Ê¹µÃÖ±½Ó¶¨ÒåµÄ·½Ê½Ê§Ğ§£¬Ö»ÄÜÍ¨¹ıget_instanceÀ´»ñÈ¡ÊµÀı
+	PoolAlloc() {	// æ„é€ å‡½æ•°privateï¼Œä½¿å¾—ç›´æ¥å®šä¹‰çš„æ–¹å¼å¤±æ•ˆï¼Œåªèƒ½é€šè¿‡get_instanceæ¥è·å–å®ä¾‹
 		std::cout << "Constructor called once" << std::endl;
 	}
 public:
-	~PoolAlloc() {	// Îö¹¹º¯Êıpublic¼´¿É
+	~PoolAlloc() {	// ææ„å‡½æ•°publicå³å¯
 		std::cout << "Destructor called once" << std::endl;
 		obj** cur_list_head = nullptr;
 		obj* p = nullptr, *q = nullptr;
@@ -242,16 +242,16 @@ public:
 				q = p->next;
 				/* TODO */
 
-				/* ÊÍ·ÅpËùÔÚµÄÒ»¶Î¿Õ¼ä£¬¹²i¸ö×Ö½Ú£¬ÈçºÎ×öµ½£¿ */
+				/* é‡Šæ”¾pæ‰€åœ¨çš„ä¸€æ®µç©ºé—´ï¼Œå…±iä¸ªå­—èŠ‚ï¼Œå¦‚ä½•åšåˆ°ï¼Ÿ */
 				p = q;
 			}
 		}
 	}
-	static PoolAlloc& get_instance() {	// Í¨¹ıget_instance»ñÈ¡Î¨Ò»ÊµÀı£¨µ¥ÀıÄ£Ê½ - ÀÁººÄ£Ê½£©
-		static PoolAlloc instance;		// ¾Ö²¿¾²Ì¬±äÁ¿£¬ÀûÓÃC++11µÄMagic StaticÌØĞÔ£¬ÃèÊöÈçÏÂ:
-										// If control enters the declaration concurrently while the
-										// variable is being initialized, the concurrent execution
-										// shall wait for completion of the initialization.
+	static PoolAlloc& get_instance() {	// é€šè¿‡get_instanceè·å–å”¯ä¸€å®ä¾‹ï¼ˆå•ä¾‹æ¨¡å¼ - æ‡’æ±‰æ¨¡å¼ï¼‰
+		static PoolAlloc instance;	// å±€éƒ¨é™æ€å˜é‡ï¼Œåˆ©ç”¨C++11çš„Magic Staticç‰¹æ€§ï¼Œæè¿°å¦‚ä¸‹:
+						// If control enters the declaration concurrently while the
+						// variable is being initialized, the concurrent execution
+						// shall wait for completion of the initialization.
 		return instance;
 	}
 };
