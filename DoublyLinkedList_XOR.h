@@ -6,7 +6,7 @@
 
 #define Int2Ptr(x) reinterpret_cast<ListNode<T>*>(x)
 
-/* Òà»òË«ÏòÁ´±íµÄ½áµã */
+/* äº¦æˆ–åŒå‘é“¾è¡¨çš„ç»“ç‚¹ */
 template<typename T>
 class ListNode
 {
@@ -32,7 +32,7 @@ public:
 	ListNode<T>*& getPointerRef() const { return ptrdiff; }
 };
 
-/* ÓÃÓÚ¹ÜÀíÒà»òË«ÏòÁ´±í */
+/* ç”¨äºç®¡ç†äº¦æˆ–åŒå‘é“¾è¡¨ */
 template<typename T>
 class DoublyLinkedList_XOR
 {
@@ -65,7 +65,7 @@ public:
 	ListNode<T>* search_by_value(const T& t, bool seq = true);
 	ListNode<T>* search_by_index(size_t index, bool seq = true);
 	size_t locate(const T& t);
-	ListNode<T>* operator [](size_t index) { return search_by_index(index); }	/* Ã»ÓĞÒıÓÃàŞ£¬Ö»ÊÇ½â½â²ö£¬ÎŞ·¨Í¨¹ıËüÖ±½ÓĞŞ¸Ä */
+	ListNode<T>* operator [](size_t index) { return search_by_index(index); }	/* æ²¡æœ‰å¼•ç”¨å™¢ï¼Œåªæ˜¯è§£è§£é¦‹ï¼Œæ— æ³•é€šè¿‡å®ƒç›´æ¥ä¿®æ”¹ */
 
 	void seTraverse();
 	void reTraverse();
@@ -334,9 +334,9 @@ void DoublyLinkedList_XOR<T>::clear() {
 		delete p;
 		p = q;
 	}
-	/* °ÑheadºÍtail¸øÖÃ¿Õ¿©. */
+	/* æŠŠheadå’Œtailç»™ç½®ç©ºå’¯. */
 	head = tail = nullptr;
-	/* ³¤¶È×ÔÈ»ÊÇ0 */
+	/* é•¿åº¦è‡ªç„¶æ˜¯0 */
 	length = 0;
 }
 
@@ -348,7 +348,7 @@ int DoublyLinkedList_XOR<T>::countSatisfied(bool (*pf)(const T& t)) {
 	ListNode<T>* q = head;
 	while (p) {
 		if (pf(p->data)) {
-			/* TODO: ÒÔ¼ÆÊıÎªÀı£¬¿ÉÒÔÊÇÆäËüµÄ²Ù×÷ */
+			/* TODO: ä»¥è®¡æ•°ä¸ºä¾‹ï¼Œå¯ä»¥æ˜¯å…¶å®ƒçš„æ“ä½œ */
 			++cnt;
 		}
 		q = Int2Ptr(Ptr2Int(p->ptrdiff) ^ nPrev);
@@ -385,7 +385,7 @@ void DoublyLinkedList_XOR<T>::reTraverse() {
 	}
 }
 
-
+// Test:
 //DoublyLinkedList_XOR<int> list{ 6,66,666,555,55,5 };
 //list.push_range({ 1,3,9,8,10,6,4 });
 //list.push_range({ 9,9,9,9 }, false);
