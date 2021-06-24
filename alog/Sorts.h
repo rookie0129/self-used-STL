@@ -7,7 +7,7 @@
 using std::vector;
 using std::swap;
 
-// �������һ����
+// 随机生成一组数
 void arrayGenerator(vector<int>& _arr, int _size) {
 	srand(time(nullptr));
 	_arr.clear();
@@ -16,7 +16,7 @@ void arrayGenerator(vector<int>& _arr, int _size) {
 	}
 }
 
-// �������
+// 输出数组
 void arrayDisplay(vector<int>& _arr) {
 	std::cout << std::endl;
 	for (int i = 0; i != (int)_arr.size(); ++i) {
@@ -25,15 +25,15 @@ void arrayDisplay(vector<int>& _arr) {
 	std::cout << std::endl;
 }
 
-//ʱ�临�Ӷȣ������Ƶ�ȵ��Ͻ������Ĺ���
-//�ռ临�Ӷȣ������ڴ�ʹ�ã�ͬ���Ƕ��Ͻ�������
-//�ȶ��ԣ�������ͬ�Ĺؼ��ֵļ�¼�����������Щ��¼����Դ����Ա��ֲ���
+//时间复杂度：对语句频度的上界所做的估量
+//空间复杂度：额外内存使用，同样是对上界做估量
+//稳定性：具有相同的关键字的记录经过排序后，这些记录的相对次序仍保持不变
 
-/**	ð������
+/**	冒泡排序
 *
-*	ʱ�䣺��� O(n)��ƽ��O(n^2)���O(n^2) -> ��������������ﵽ��ã�������flag�Ż���
-*	�ռ䣺O(1)��ԭ��
-*	�ȶ��ԣ��ȶ���ֻ��"ǰ>��"�����ڶ���ǰ�󽻻�
+*	时间：最好 O(n)，平均O(n^2)，最坏O(n^2) -> 若本来就有序，则达到最好（需设置flag优化）
+*	空间：O(1)，原地
+*	稳定性：稳定，只对"前>后"的相邻对做前后交换
 *
 */
 template<typename T>
@@ -55,11 +55,11 @@ public:
 };
 
 
-/**	ѡ������
+/**	选择排序
 *
-*	ʱ�䣺��� O(n^2) = ƽ��O(n^2) = �O(n^2) -> ��ԭ�����޹أ�n + n-1 + n-2 + ... + 2 + 1 = n*(n+1)/2 �� O(n)
-*	�ռ䣺O(1)��ԭ��
-*	�ȶ��ԣ����ȶ���ÿ�ν�arr[minIndex]��arr[i]����������{ "5",6,7,5,"2",8 }����һ��5��2���������һ��5��ڶ���5��
+*	时间：最好 O(n^2) = 平均O(n^2) = 最坏O(n^2) -> 和原数列无关，n + n-1 + n-2 + ... + 2 + 1 = n*(n+1)/2 即 O(n)
+*	空间：O(1)，原地
+*	稳定性：不稳定，每次将arr[minIndex]和arr[i]做交换，如{ "5",6,7,5,"2",8 }，第一个5和2交换，则第一个5变第二个5了
 *
 */
 template<typename T>
@@ -81,11 +81,11 @@ public:
 };
 
 
-/**	��������
+/**	插入排序
 *
-*	ʱ�䣺��� O(n)��ƽ��O(n^2)���O(n^2)	-> ��������������ﵽ��ã�ѹ��û�����룩
-*	�ռ䣺O(1)��ԭ��
-*	�ȶ��ԣ��ȶ�������ʱ������ͬ�ľͲ�������
+*	时间：最好 O(n)，平均O(n^2)，最坏O(n^2)	-> 若本来就有序，则达到最好（压根没做插入）
+*	空间：O(1)，原地
+*	稳定性：稳定，插入时碰到相同的就不再移了
 *
 */
 template<typename T>
@@ -108,11 +108,11 @@ public:
 };
 
 
-/**	ϣ������
+/**	希尔排序
 *
-*	ʱ�䣺���O(n)��ƽ��O(n^1.3)���O(n^2) -> ��������������ﵽ���
-*	�ռ䣺O(1)��ԭ��
-*	�ȶ��ԣ����ȶ�����Ϊ�Ǹ���gap�ģ������ƶ�ʱ����gap = 2 { 1,"6",5,"5",8, }��6�͵ڶ���5��������ڶ���5���һ��5
+*	时间：最好O(n)，平均O(n^1.3)，最坏O(n^2) -> 若本来就有序，则达到最好
+*	空间：O(1)，原地
+*	稳定性：不稳定，因为是隔着gap的，进行移动时，如gap = 2 { 1,"6",5,"5",8, }，6和第二个5交换，则第二个5变第一个5
 *
 */
 template<typename T>
@@ -135,12 +135,12 @@ public:
 };
 
 
-/**	�鲢����
+/**	归并排序
 *
-*   ʱ�临�Ӷȷ�����T(n) = 2T(n/2) + n, Ӧ��������������a=b=2��n^logb(a)=n��������T(n) = O(nlogn)
-*	ʱ�䣺���O(nlogn) = ƽ��O(nlogn) = �O(nlogn) -> ��ԭ�����޹�
-*	�ռ䣺O(n),��ԭ��
-*	�ȶ��ԣ�ȫ�ȵģ������index����ֵ = �ұ�index����ֵ��ȡ����ߵģ��ʲ����ƻ��ȶ���
+*   时间复杂度分析：T(n) = 2T(n/2) + n, 应用主方法，代入a=b=2，n^logb(a)=n，分析得T(n) = O(nlogn)
+*	时间：最好O(nlogn) = 平均O(nlogn) = 最坏O(nlogn) -> 和原数列无关
+*	空间：O(n),非原地
+*	稳定性：全稳的，当左边index处的值 = 右边index处的值，取了左边的，故不会破坏稳定性
 *
 */
 template<typename T>
@@ -187,12 +187,12 @@ public:
 };
 
 
-/**	��������
+/**	快速排序
 *
-*   ʱ�临�Ӷȷ�����ͨ�������T(n) = 2T(n/2) + n���Ӷ�O(nlogn)��������T(n) = T(n-1) + n���Ӷ�O(n^2)
-*	ʱ�䣺���O(nlogn)��ƽ��O(nlogn)���O(n^2) -> ��������������ﵽ���Ĭ��shi��һ��Ϊ��Ŧ������£�
-*	�ռ䣺O(1) / O(logn)��ԭ��
-*	�ȶ��ԣ����ȣ�������Ŧλ�õĹ������п����ƻ��ȶ���
+*   时间复杂度分析：通常情况：T(n) = 2T(n/2) + n，从而O(nlogn)；最坏情况：T(n) = T(n-1) + n，从而O(n^2)
+*	时间：最好O(nlogn)，平均O(nlogn)，最坏O(n^2) -> 若本来就有序，则达到最坏（默认shi第一个为枢纽的情况下）
+*	空间：O(1) / O(logn)，原地
+*	稳定性：不稳，调整枢纽位置的过程中有可能破坏稳定性
 *
 */
 template<typename T>
@@ -251,19 +251,19 @@ public:
 };
 
 
-/**	������
+/**	堆排序
 *
-*	ʱ�䣺1.���ѣ�����ȫ�����������з�Ҷ�Ӳ�ĸ߶ȼ����Ҷ�ӽڵ����йأ�O(n)
-*         2.�����ܣ������O(nlogn)��ƽ��O(nlogn)���O(nlogn) -> ��ԭ�����޹أ�n���� * ��Ӧ�߶�logn�����ƣ� = nlogn
-*	�ռ䣺O(1)��ԭ��
-*	�ȶ��ԣ���Ȼ���ȣ����ܳ��֣���Ϊ���ڵ��n����n+1����ֵ��ȣ������ڵ�n�������˽����������ڵ�n+1û������
+*	时间：1.建堆：与完全二叉树中所有非叶子层的高度及其非叶子节点数有关，O(n)
+*         2.排序（总）：最好O(nlogn)，平均O(nlogn)，最坏O(nlogn) -> 与原数列无关，n个数 * 相应高度logn（近似） = nlogn
+*	空间：O(1)，原地
+*	稳定性：显然不稳，可能出现：作为父节点的n处和n+1处的值相等，但父节点n向下做了交换，而父节点n+1没做交换
 *
 */
 template<typename T>
 class Heap_Sort {
-	// �� = ��ȫ���������������ʾ
-	// �󶥶ѣ�arr[i] >= arr[2i+1] && arr[i] >= arr[2i+2]  
-	// С���ѣ�arr[i] <= arr[2i+1] && arr[i] <= arr[2i+2]
+	// 堆 = 完全二叉树，用数组表示
+	// 大顶堆：arr[i] >= arr[2i+1] && arr[i] >= arr[2i+2]  
+	// 小顶堆：arr[i] <= arr[2i+1] && arr[i] <= arr[2i+2]
 public:
 	static void heapify(vector<T>& arr, int parent, int end) {
 		int maxChild = 2 * parent + 1;	// initially, maxChild is leftChild of initial parent
@@ -293,14 +293,14 @@ public:
 };
 
  
-/**	��������ÿ��Ͱֻ�洢��һ��ֵ
+/**	计数排序：每个桶只存储单一键值
 *
-*	ʱ�䣺1.����ֵ+�����������飺O(n+n)
-*         2.����O(k)��k = maxVal - minVal + 1����ͬ
-*         3.�ܣ����O(n+k) = ƽ��O(n+k) = �O(n+k) -> ��ԭ�����޹أ�n������������һ��
-*	�ռ䣺O(k)�������˸������飬��Ȼ����ԭ�ص�
-*	�ȶ��ԣ����ȵ�
-*   ȱ�ݣ������ֵ����Сֵ��������ռ������ϱ��ֲ��ѣ��������������޷�����
+*	时间：1.找最值+建立计数数组：O(n+n)
+*         2.排序：O(k)，k = maxVal - minVal + 1，下同
+*         3.总：最好O(n+k) = 平均O(n+k) = 最坏O(n+k) -> 与原数列无关，n个数都给你来一遍
+*	空间：O(k)，借助了辅助数组，显然不是原地的
+*	稳定性：很稳的
+*   缺陷：若最大值与最小值差距过大，则空间性能上表现不佳；若非整数，则无法计数
 *
 */
 class Counting_Sort {
@@ -328,12 +328,12 @@ public:
 	}
 };
 
-/**	Ͱ����ÿ��Ͱ�洢һ����Χ����ֵ
+/**	桶排序：每个桶存储一定范围的数值
 *
-*	ʱ�䣺���O(n+k)��ƽ��O(n+k)����˻�Ϊ����O(n^2) -> �����ݷֲ��й�
-*	�ռ䣺O(n)
-*	�ȶ��ԣ���
-*	ȱ�ݣ������ݷֲ�����������ֺܲ�����Ǹ��Ż�
+*	时间：最好O(n+k)，平均O(n+k)，最坏退化为快排O(n^2) -> 与数据分布有关
+*	空间：O(n)
+*	稳定性：稳
+*	缺陷：若数据分布不均，则表现很差，几乎是负优化
 * 
 */
 class Bucket_Sort {
@@ -353,30 +353,30 @@ public:
 				minv = elem;
 			}
 		}
-		int nBuckets = (maxv - minv) / len + 1; // ������ֵ��Դ���г���ȷ��Ͱ���������Ӷ�ȷ����Χ����
+		int nBuckets = (maxv - minv) / len + 1; // 根据最值和源数列长度确定桶的数量，从而确定范围划分
 		vector<vector<int>> buckets(nBuckets);
 		for (auto& elem : arr) {
 			int i = (elem - minv) / len;
-			buckets[i].push_back(elem);		// ��Ͱ
+			buckets[i].push_back(elem);		// 分桶
 		}
 		int index = 0;
 		for (auto& b : buckets) {
-			Quick_Sort<int>::QuickSort(b);	// ÿ��Ͱ����������QuickSort
+			Quick_Sort<int>::QuickSort(b);	// 每个桶排序，这里用QuickSort
 			for (auto& elem : b) {
-				arr[index++] = elem;		// ���η��ص�ԭ����
+				arr[index++] = elem;		// 依次返回到原数组
 			}
 		}
 	}
 };
 
-/**	�������򣺸��ݼ�ֵ��ÿλ����������Ͱ
+/**	基数排序：根据键值的每位数字来分配桶
 *
-*	ʱ�䣺1.����ֵ+�󳤶ȣ�O(n+k)��kָ������ֵ��λ������ͬ
-*         2.����O(n*k)
-*         3.�ܣ����O(n*k) = ƽ��O(n*k) = �O(n*k) -> ��ԭ�����޹أ�n������������k��
-*	�ռ䣺O(n)
-*	�ȶ��ԣ���
-*	ȱ�ݣ�ֻ�����˷Ǹ���������ʵҲ���ԶԸ������򣬵�������δ���ǣ���Ҫ����ŵ�����Ԫ���л����ĸ������
+*	时间：1.找最值+求长度：O(n+k)，k指的是最值的位数，下同
+*         2.排序：O(n*k)
+*         3.总：最好O(n*k) = 平均O(n*k) = 最坏O(n*k) -> 与原数列无关，n个数都给你来k遍
+*	空间：O(n)
+*	稳定性：稳
+*	缺陷：只考虑了非负整数（其实也可以对负数排序，但这里暂未考虑）；要求待排的序列元素有基数的概念存在
 */
 class Radix_Sort {
 public:
@@ -415,4 +415,4 @@ public:
 			}
 		}
 	}
-};
+}; 
